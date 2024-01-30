@@ -1,0 +1,17 @@
+﻿@model List<ControlExamples.EF.tblEmployee>;
+@{
+    ViewBag.Title = "ViewAllEmployees";
+}
+
+<div style="margin-top:15px;">
+    <span style="width:150px; font-size:22px;">Employees List</span>
+    
+    @Html.ActionLink("Add New Employee", "AddEmployee",new { },new {style="float:right; margin-right:5px; margin-top:5px;" })
+</div>
+
+<hr/>
+
+@foreach (var item in Model)
+{
+    @item.empName
+}

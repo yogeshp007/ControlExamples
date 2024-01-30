@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "AddEmployee";
+}
+
+<h2>Add New Employee Details Here..</h2>
+<hr />
+@if (ViewBag.msg != "")
+{
+    <div class="alert alert-success" role="alert">@ViewBag.msg</div>
+}
+<br />
+
+<form method="post" action="addEmployee">
+    <div class="form-group">
+        <label for="empName">Employee Name</label>
+        <input type="text" class="form-control" id="empName" name="empName" placeholder="Enter employee name">
+    </div>
+    <div class="form-group">
+        <label for="depName">Department</label>
+        <input type="text" class="form-control" id="depName" name="depName" placeholder="Enter department name">
+    </div>
+    <div class="form-group">
+        <label for="designation">designation</label>
+        @*<input type="text" id="designation" class="form-control" name="designation">*@
+        <select id="designation" class="form-control" name="designation">
+            <option value="" tabindex="0">Select Designation</option>
+            <option value="Accountant">Accountant</option>
+            <option value="Manager">Manager</option>
+            <option value="Jr. Developer">Jr. Developer</option>
+            <option value="Sr. Developer">Sr. Developer</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-default">Reset</button>
+</form>
+
+<br/>
+<br/>
+<a href="viewAllEmployees">View Employee List</a>

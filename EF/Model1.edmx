@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MyAppDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MyAppDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblDepartment">
           <Key>
             <PropertyRef Name="depId" />
@@ -18,15 +18,17 @@
           </Key>
           <Property Name="empId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="empName" Type="varchar" MaxLength="30" />
-          <Property Name="depName" Type="varchar" MaxLength="50" />
+          <Property Name="depId" Type="int" />
           <Property Name="designation" Type="varchar" MaxLength="30" />
+          <Property Name="gender" Type="varchar" MaxLength="6" />
+          <Property Name="hobbies" Type="varchar" MaxLength="100" />
+          <Property Name="ephoto" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityContainer Name="MyAppDBModelStoreContainer">
           <EntitySet Name="tblDepartment" EntityType="Self.tblDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyAppDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -37,19 +39,22 @@
           <Property Name="depId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="depName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityContainer Name="MyAppDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblDepartments" EntityType="Self.tblDepartment" />
+          <EntitySet Name="tblEmployees" EntityType="MyAppDBModel.tblEmployee" />
+        </EntityContainer>
         <EntityType Name="tblEmployee">
           <Key>
             <PropertyRef Name="empId" />
           </Key>
           <Property Name="empId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="empName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="depName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="depId" Type="Int32" />
           <Property Name="designation" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="hobbies" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ephoto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="MyAppDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tblDepartments" EntityType="Self.tblDepartment" />
-          <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -67,10 +72,13 @@
           <EntitySetMapping Name="tblEmployees">
             <EntityTypeMapping TypeName="MyAppDBModel.tblEmployee">
               <MappingFragment StoreEntitySet="tblEmployee">
-                <ScalarProperty Name="empId" ColumnName="empId" />
-                <ScalarProperty Name="empName" ColumnName="empName" />
-                <ScalarProperty Name="depName" ColumnName="depName" />
+                <ScalarProperty Name="ephoto" ColumnName="ephoto" />
+                <ScalarProperty Name="hobbies" ColumnName="hobbies" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
                 <ScalarProperty Name="designation" ColumnName="designation" />
+                <ScalarProperty Name="depId" ColumnName="depId" />
+                <ScalarProperty Name="empName" ColumnName="empName" />
+                <ScalarProperty Name="empId" ColumnName="empId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -16,7 +16,10 @@ namespace ControlExamples.EF
     {
         public int empId { get; set; }
         public string empName { get; set; }
-        public string depName { get; set; }
+        public Nullable<int> depId { get; set; }
         public string designation { get; set; }
+        public string gender { get; set; }
+        public string hobbies { get; set; }
+        public string ephoto { get; set; }
     }
 }

@@ -5,49 +5,66 @@
 
 <h2>Add New Employee Details Here..</h2>
 <hr />
-@if (ViewBag.msg != "")
+@*@if (ViewBag.msg != "")
 {
     <div class="alert alert-success" role="alert">@ViewBag.msg</div>
-}
+}*@
 <br />
 
 <form method="post" action="addEmployee" enctype="multipart/form-data">
     <div class="form-group">
         <label for="empName">Employee Name</label>
-        <input type="text" class="form-control" id="empName" name="empName" placeholder="Enter employee name">
+        <input type="text" class="form-control" id="empName" value="@Model.empName" name="empName" placeholder="Enter employee name">
     </div>
     <div class="form-group">
         <label for="depName">Department</label>
         @*<input type="text" class="form-control" id="depName" name="depName" placeholder="Enter department name">*@
-        <select id="depId" class="form-control" name="depId">
-            <option value="" tabindex="0">Select Department</option>
-            @foreach (var item in ViewBag.departments as List<ControlExamples.EF.tblDepartment>)
+    <select id="depId" class="form-control" name="depId">
+        <option value="" tabindex="0">Select Department</option>
+        @foreach (var item in ViewBag.departments as List<ControlExamples.EF.tblDepartment>)
+        {
+            if (item.depId == Model.depId)
+            {
+                <option value="@item.depId" selected="selected">@item.depName</option>
+            }
+            else
             {
                 <option value="@item.depId">@item.depName</option>
             }
-        </select>
+        }
+    </select>
     </div>
     <div class="form-group">
         <label for="designation">designation</label>
         @*<input type="text" id="designation" class="form-control" name="designation">*@
-        <select id="designation" class="form-control" name="designation">
-            <option value="" tabindex="0">Select Designation</option>
-            <option value="Accountant">Accountant</option>
-            <option value="Manager">Manager</option>
-            <option value="Jr. Developer">Jr. Developer</option>
-            <option value="Sr. Developer">Sr. Developer</option>
-        </select>
+    <select id="designation" class="form-control" name="designation">
+        <option value="" tabindex="0">Select Designation</option>
+        <option value="Accountant">Accountant</option>
+        <option value="Manager">Manager</option>
+        <option value="Jr. Developer">Jr. Developer</option>
+        <option value="Sr. Developer">Sr. Developer</option>
+    </select>
     </div>
     <div class="form-group">
         <label for="designation">Hobbies</label>
         <br />
-        <input type="checkbox" name="hby" value="Cricket" /> Cricket
+        @{var hobbies = Model.hobbies.Split(','); }
+        @foreach (var item in ViewBag.hobbies)
+        {
+            foreach (var hby in hobbies)
+            {
+                if (item == hby)
+                {
+                    <input type="checkbox" name="hby" value="@item" checked="checked"/>@item
+                }
+                else
+                {
+                    continue;
+                    <input type="checkbox" name="hby" value="@item" />@item
+                }
+            }
 
-        <input type="checkbox" name="hby" value="Chess" /> Chess
-
-        <input type="checkbox" name="hby" value="Carrom" /> Carrom
-
-        <input type="checkbox" name="hby" value="Base ball" /> Base ball
+        }
 
     </div>
     <div class="form-group">

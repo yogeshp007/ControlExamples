@@ -16,38 +16,69 @@ namespace ControlExamples.Controllers
         // GET: Employees
         public ActionResult ViewAllEmployees()
         {
-            var data = from emp in db.tblEmployees
-                       join dep in db.tblDepartments on emp.depId equals dep.depId
-                       select new
-                       {
-                          emp,dep
-                       };
+            //var data = from emp in db.tblEmployees
+            //           join dep in db.tblDepartments on emp.depId equals dep.depId
+            //           select new
+            //           {
+            //              emp,dep
+            //           };
 
-            var list = new List<EmployeeModel>();
+            var list = (from emp in db.tblEmployees
+                        join dep in db.tblDepartments on emp.depId equals dep.depId
+                        select new EmployeeModel
+                        {
+                            Id = emp.empId,
+                            Name = emp.empName,
+                            Designation = emp.designation,
+                            Hobbies = emp.hobbies,
+                            Gender = emp.gender,
+                            Ephoto = emp.ephoto,
+                            DepId = dep.depId,
+                            DepName = dep.depName
+                        }).ToList();
 
-            foreach (var item in data)
-            {
-                EmployeeModel em = new EmployeeModel();
-                em.DepId = item.dep.depId;
-                em.DepName = item.dep.depName;
-                em.Id = item.emp.empId;
-                em.Name = item.emp.empName;
-                em.Hobbies = item.emp.hobbies;
-                em.Gender = item.emp.gender;
-                em.Ephoto = item.emp.ephoto;
-                em.Designation = item.emp.designation;
+            //var list = new List<EmployeeModel>();
 
-                list.Add(em);
-            }
+            //foreach (var item in data)
+            //{
+            //    EmployeeModel em = new EmployeeModel();
+            //    em.DepId = item.dep.depId;
+            //    em.DepName = item.dep.depName;
+            //    em.Id = item.emp.empId;
+            //    em.Name = item.emp.empName;
+            //    em.Hobbies = item.emp.hobbies;
+            //    em.Gender = item.emp.gender;
+            //    em.Ephoto = item.emp.ephoto;
+            //    em.Designation = item.emp.designation;
+
+            //    list.Add(em);
+            //}
 
             return View(list);
         }
 
-        public ActionResult AddEmployee()
+        public ActionResult AddEmployee(int id=0)
         {
             ViewBag.departments = db.tblDepartments.ToList();
-            ViewBag.msg = "";
-            return View();
+            //ViewBag.designations = new List<string> {"Accountant", "BDE","Manager","HOD" };
+
+
+            string str = "yogesh,yagnesh,ruchi.prithvi";
+            var item = str.Split(',');
+
+            if (id > 0)
+            {
+                ViewBag.hobbies = new List<string> {"Chess", "Cricket", "Carrom", "Base ball" };
+                var emp = db.tblEmployees.Find(id);
+                ViewBag.msg = "";
+                return View(emp);
+            }
+            else
+            {
+                ViewBag.hobbies = new List<string> { "Chess", "Cricket", "Carrom", "Base ball" };
+                ViewBag.msg = "";
+                return View();
+            }
         }
 
         [HttpPost]

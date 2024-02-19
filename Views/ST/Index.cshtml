@@ -1,0 +1,17 @@
+﻿@model ControlExamples.Models.EmployeeModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Index","ST",FormMethod.Post,new {enctype="multipart/form-data" })) {
+
+    @Html.TextBoxFor(model => model.Name, new { id="txtEmplName"})
+
+    @Html.DropDownListFor(model=>model.DepId,new SelectList(ViewBag.departmentList,"depId","depName"))
+
+
+<input type="submit" name="name" value="Submit" />
+  
+}

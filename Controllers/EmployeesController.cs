@@ -76,6 +76,7 @@ namespace ControlExamples.Controllers
             else
             {
                 ViewBag.hobbies = new List<string> { "Chess", "Cricket", "Carrom", "Base ball" };
+                var emp = new tblEmployee();
                 ViewBag.msg = "";
                 return View();
             }

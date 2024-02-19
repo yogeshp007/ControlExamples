@@ -11,6 +11,9 @@
 }*@
 <br />
 
+@if (Model != null || Model != "")
+{
+
 <form method="post" action="addEmployee" enctype="multipart/form-data">
     <div class="form-group">
         <label for="empName">Employee Name</label>
@@ -48,7 +51,7 @@
     <div class="form-group">
         <label for="designation">Hobbies</label>
         <br />
-        @{var hobbies = Model.hobbies.Split(','); }
+        @{var hobbies = Model.hobbies?.Split(','); }
         @foreach (var item in ViewBag.hobbies)
         {
             foreach (var hby in hobbies)
@@ -83,6 +86,7 @@
     <button type="submit" class="btn btn-primary">Submit</button>
     <button type="reset" class="btn btn-default">Reset</button>
 </form>
+            }
 
 <br/>
 <br/>

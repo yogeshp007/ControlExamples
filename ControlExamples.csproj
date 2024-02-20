@@ -131,6 +131,7 @@
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JqExampleController.cs" />
     <Compile Include="Controllers\STController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="EF\Model1.Context.cs">
@@ -258,6 +259,7 @@
     <Content Include="Views\Employees\ViewAllEmployees.cshtml" />
     <Content Include="Views\Employees\AddEmployee.cshtml" />
     <Content Include="Views\ST\Index.cshtml" />
+    <Content Include="Views\JqExample\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

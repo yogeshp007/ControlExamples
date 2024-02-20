@@ -1,0 +1,84 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            //$('div').hover(function () {
+
+            //    $('#btn').css('color', 'red');
+            //    $('#btn').css('zoom', 0);
+
+            //});
+
+            //$('div').mouseout(function () {
+
+            //    $('#btn').css('color', 'blue');
+            //    $('#btn').css('zoom', 2);
+
+            //});
+
+            $('#btn1').click(function () {
+                var txt1 = $('#txtName').val();
+                var txt2 = $('.txtData').val();
+
+                var data = 'my name is ' + txt1 + ' ' + txt2;
+
+                $('p').html('my name is ' + txt1 + ' ' + txt2);
+
+                $('#response').val(data);
+            });
+
+            $('#txtName').change(function () {
+                console.log('ddfd');
+                var val = $(this).val().length;
+                console.log(val);
+                if (val > 6) {
+                    alert('please add proper name');
+                    $(this).css('border', '1px solid red');
+                    $(this).focus();
+                }
+            });
+
+            $.ajax('/jqexample/getdata',   // request url
+                {
+                    success: function (data, status, xhr) {// success callback function
+                        console.log(data);
+                        $('span').append(data.message);
+                    }
+                });
+
+        });
+    </script>
+</head>
+<body>
+    @*<div style="width:100px; height:200px; border:1px solid red;">
+            Hello Guys!!!!
+        </div>
+
+        <button id="btn">Click</button>*@
+
+    <input type="text" id="txtName" value="" />
+
+    <input type="text" class="txtData" value="" />
+
+    <button id="btn1">Click</button>
+
+    <br/>
+    <br/>
+    <input type="text" id="response" name="name" value="" />
+
+    <span></span>
+</body>
+</html>
